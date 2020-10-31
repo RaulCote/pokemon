@@ -36,6 +36,9 @@ module.exports = {
     // allows us to do absolute imports from "src"
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.scss'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
@@ -43,6 +46,7 @@ module.exports = {
     hotOnly: true,
     publicPath: 'http://localhost:3000/dist/',
     open: true,
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

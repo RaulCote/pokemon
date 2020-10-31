@@ -1,10 +1,12 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
+import Routes from './routes';
 import './styles/main.scss';
 
 const App = () => (
-  <div className="App">
-    <h1>Hello World!</h1>
-  </div>
+  <>
+    <Routes />
+  </>
 );
 
-export default App;
+export default hot(App);
