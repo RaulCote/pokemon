@@ -12,8 +12,8 @@ const Routes = () => (
   <Router>
     <Switch>
       <Redirect exact from="/" to="/pokemon" />
-      <Route path="/pokemon" component={PokemonsIndex} />
-      <Route path="/pokemon/:id" component={PokemonProfile} />
+      <Route exact path="/pokemon" component={PokemonsIndex} />
+      <Route exact path="/pokemon/:name" component={PokemonProfile} />
     </Switch>
   </Router>
 );
