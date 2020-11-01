@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const PokemonIndexCard = ({ name }) => (
-  <li className="pokemonIndexCard">
+  <Link className="pokemonIndexCard" to={`/pokemon/${name}`}>
     <div className="pokemonIndexCard__image">
       <img
         alt={`${name}-gif`}
@@ -10,7 +11,7 @@ const PokemonIndexCard = ({ name }) => (
       />
     </div>
     <h5 className="pokemonIndexCard__name">{name}</h5>
-  </li>
+  </Link>
 );
 
 export default PokemonIndexCard;

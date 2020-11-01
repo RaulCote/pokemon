@@ -11,6 +11,8 @@
   background-color: $card-bg;
   transition-duration: 0.2s;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 
   &:hover {
     background-color: $card-bg-hover;
