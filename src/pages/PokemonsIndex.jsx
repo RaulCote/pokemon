@@ -1,10 +1,14 @@
 import React from 'react';
 import PokemonIndexHeader from '../components/PokemonIndexHeader';
 import PokemonIndexCard from '../components/PokemonIndexCard';
-import usePokemonList from '../hooks/usePokemonList';
+import usePokemonFetcher from '../hooks/usePokemonFetcher';
 
 const PokemonsIndex = () => {
-  const { errorFetching, isLoading, pokemonList } = usePokemonList();
+  const { errorFetching, isLoading, data } = usePokemonFetcher(
+    '/pokemon?limit=151'
+  );
+  const pokemonList = data?.results ?? [];
+
   if (errorFetching) {
     return <div>Something went wrong...</div>;
   }
