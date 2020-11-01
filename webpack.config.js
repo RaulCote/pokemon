@@ -9,7 +9,6 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    // publicPath: "/dist/",
     filename: 'bundle.js',
   },
   module: {
@@ -30,6 +29,25 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/i,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      // options: {
+      //   limit: 8192,
+      // },
+      // },
+      // ],
+      // },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -44,6 +62,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'public/'),
     port: 3000,
     hotOnly: true,
+    clientLogLevel: 'silent',
     publicPath: 'http://localhost:3000/dist/',
     open: true,
     historyApiFallback: true,
@@ -51,6 +70,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      favicon: path.resolve(__dirname, 'public/assets', 'favicon.ico'),
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
     new Dotenv({

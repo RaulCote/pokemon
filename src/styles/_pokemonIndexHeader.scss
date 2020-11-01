@@ -1,0 +1,17 @@
+.pokemonIndexHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10%;
+  color: $text-info;
+  height: 250px;
+  margin-bottom: 3rem;
+}
+
+.pokemonIndexHeader__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+}

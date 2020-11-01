@@ -13,7 +13,6 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    // publicPath: "/dist/",
     filename: 'bundle.js',
   },
   module: {
@@ -32,12 +31,34 @@ module.exports = {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/i,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 8192,
+      //       },
+      //     },
+      //   ],
+      // },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
     // allows us to do absolute imports from "src"
     modules: [path.join(__dirname, 'src'), 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.scss'],
+    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
@@ -51,6 +72,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      favicon: path.resolve(__dirname, 'public/assets', 'favicon.ico'),
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
     new MiniCssExtractPlugin({

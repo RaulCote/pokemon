@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import PokemonIndexHeader from '../components/PokemonIndexHeader';
+import PokemonIndexCard from '../components/PokemonIndexCard';
+import usePokemonList from '../hooks/usePokemonList';
 
 const PokemonsIndex = () => {
-  const [pokemons, setPokemons] = useState([]);
-  useEffect(() => {
-    async function getPokemonsFirstGen() {
-      const pokemonService = axios.create({
-        baseURL: 'https://pokeapi.co/api/v2',
-        withCredentials: false,
-      });
+  const { errorFetching, isLoading, pokemonList } = usePokemonList();
+  if (errorFetching) {
+    return <div>Something went wrong...</div>;
+  }
 
-      const pokemonsList = await pokemonService.get('/pokemon?limit=151');
-
-      setPokemons(pokemonsList.data.results);
-    }
-    getPokemonsFirstGen();
-  }, []);
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
-    <ul>
-      {pokemons.map(pokemon => (
-        <li key={`key-${pokemon.name}`}>{pokemon.name}</li>
-      ))}
-    </ul>
+    <section className="pokemonIndex">
+      <PokemonIndexHeader count={pokemonList.length} />
+      <ul className="pokemonIndex__list">
+        {pokemonList.map(pokemon => (
+          <PokemonIndexCard key={`key-${pokemon.name}`} name={pokemon.name} />
+        ))}
+      </ul>
+    </section>
   );
 };
 

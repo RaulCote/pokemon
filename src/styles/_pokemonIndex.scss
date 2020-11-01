@@ -1,0 +1,22 @@
+.pokemonIndex {
+  margin: auto;
+}
+
+.pokemonIndex__list {
+  padding: 0 10%;
+  margin: auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 3rem;
+  grid-row-gap: 1.5rem;
+
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
