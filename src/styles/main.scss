@@ -3,11 +3,15 @@
 @import './variables.scss';
 @import './normalize';
 @import './reset';
+@import './container';
+@import './error';
+@import './loading';
 @import './closeButton';
 @import './pokemonIndex';
 @import './pokemonIndexHeader';
 @import './pokemonIndexCard';
 @import './pokemonProfile';
+@import './pokemonProfileLabel';
 
 body {
   font-family: 'Roboto', sans-serif;
