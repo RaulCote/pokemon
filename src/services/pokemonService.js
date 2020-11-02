@@ -8,9 +8,21 @@ class PokemonService {
   }
 
   async get(url) {
+    if (this[url]) return this[url];
+
     const resp = await this.service(url);
 
+    this.saveInCache(url, resp.data);
+
     return resp.data;
+  }
+
+  saveInCache(url, cachedData, time = 100000) {
+    this[url] = cachedData;
+
+    setTimeout(() => {
+      this[url] = undefined;
+    }, time);
   }
 }
 
