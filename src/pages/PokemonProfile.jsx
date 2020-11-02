@@ -1,9 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import usePokemonFetcher from '../hooks/usePokemonFetcher';
+import CloseButton from '../components/CloseButton';
+import PokemonGif from '../components/PokemonGif';
 
 const PokemonProfile = () => {
   const { name } = useParams();
+  const history = useHistory();
   const { errorFetching, isLoading, data: pokemon } = usePokemonFetcher(
     `/pokemon/${name}`
   );
@@ -19,7 +22,13 @@ const PokemonProfile = () => {
   // console.log('PokemonProfile Page :::: ', pokemon);
 
   return (
-    <>
+    <article className="pokemonProfile">
+      <CloseButton
+        className="pokemonProfile__close"
+        onClick={() => history.push('/pokemon')}
+      />
+      <PokemonGif className="pokemonProfile__image" name={pokemon.name} />
+      <h5 className="pokemonProfile__name">{pokemon.name}</h5>
       <p>ID: {pokemon.id}</p>
       <p>
         Type:{' '}
@@ -34,7 +43,7 @@ const PokemonProfile = () => {
           <li key={`${pokemon.id}-${ability.name}`}>{ability.name}</li>
         ))}
       </p>
-    </>
+    </article>
   );
 };
 
