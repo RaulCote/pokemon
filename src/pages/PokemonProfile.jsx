@@ -3,47 +3,42 @@ import { useParams, useHistory } from 'react-router-dom';
 import usePokemonFetcher from '../hooks/usePokemonFetcher';
 import CloseButton from '../components/CloseButton';
 import PokemonGif from '../components/PokemonGif';
+import Loading from '../components/Loading';
+import Container from '../components/Container';
+import PokemonProfileLabel from '../components/PokemonProfileLabel';
 
 const PokemonProfile = () => {
   const { name } = useParams();
   const history = useHistory();
-  const { errorFetching, isLoading, data: pokemon } = usePokemonFetcher(
-    `/pokemon/${name}`
-  );
-
-  if (errorFetching) {
-    return <div>Something went wrong...</div>;
-  }
+  const { isLoading, data: pokemon } = usePokemonFetcher(`/pokemon/${name}`);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
-  // console.log('PokemonProfile Page :::: ', pokemon);
-
   return (
-    <article className="pokemonProfile">
-      <CloseButton
-        className="pokemonProfile__close"
-        onClick={() => history.push('/pokemon')}
-      />
-      <PokemonGif className="pokemonProfile__image" name={pokemon.name} />
-      <h5 className="pokemonProfile__name">{pokemon.name}</h5>
-      <p>ID: {pokemon.id}</p>
-      <p>
-        Type:{' '}
-        {pokemon.types.map(({ type }) => (
-          <li key={`${pokemon.id}-${type.name}`}>{type.name}</li>
-        ))}
-      </p>
-      <p>Height: {pokemon.height}</p>
-      <p>
-        Abilities:
-        {pokemon.abilities.map(({ ability }) => (
-          <li key={`${pokemon.id}-${ability.name}`}>{ability.name}</li>
-        ))}
-      </p>
-    </article>
+    <Container>
+      <article className="pokemonProfile">
+        <CloseButton
+          className="pokemonProfile__close"
+          onClick={() => history.push('/pokemon')}
+        />
+
+        <PokemonGif className="pokemonProfile__image" name={pokemon.name} />
+        <h3 className="pokemonProfile__name">{pokemon.name}</h3>
+
+        <PokemonProfileLabel title="ID" properties={[pokemon.id]} />
+        <PokemonProfileLabel
+          title="Type"
+          properties={pokemon.types.map(({ type }) => type.name)}
+        />
+        <PokemonProfileLabel title="Height" properties={[pokemon.height]} />
+        <PokemonProfileLabel
+          title="Habilities"
+          properties={pokemon.abilities.map(({ ability }) => ability.name)}
+        />
+      </article>
+    </Container>
   );
 };
 

@@ -1,33 +1,30 @@
 import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import pokemonService from '../services/pokemonService';
 
 const usePokemonFetcher = url => {
   const [data, setData] = useState();
   const [isLoading, setLoading] = useState(true);
-  const [errorFetching, setErrorFetching] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        // const resp = await axios.get(
-        //   `https://pokeapi.co/api/v2${url}`
-        // );
         const resp = await pokemonService.get(url);
 
         setData(resp);
+        setLoading(false);
       } catch (err) {
         const errorStatus = err?.response?.status ?? 500;
-        setErrorFetching(errorStatus);
-      } finally {
-        setLoading(false);
+        if (errorStatus === 404) history.push('/404');
+        history.push('/500');
       }
     };
 
     getData();
-  }, [url]);
+  }, [history, url]);
 
-  return { data, isLoading, errorFetching };
+  return { data, isLoading };
 };
 
 export default usePokemonFetcher;

@@ -2,30 +2,26 @@ import React from 'react';
 import PokemonIndexHeader from '../components/PokemonIndexHeader';
 import PokemonIndexCard from '../components/PokemonIndexCard';
 import usePokemonFetcher from '../hooks/usePokemonFetcher';
+import Container from '../components/Container';
+import Loading from '../components/Loading';
 
 const PokemonsIndex = () => {
-  const { errorFetching, isLoading, data } = usePokemonFetcher(
-    '/pokemon?limit=151'
-  );
+  const { isLoading, data } = usePokemonFetcher('/pokemon?limit=151');
   const pokemonList = data?.results ?? [];
 
-  if (errorFetching) {
-    return <div>Something went wrong...</div>;
-  }
-
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (
-    <section className="pokemonIndex">
+    <Container>
       <PokemonIndexHeader count={pokemonList.length} />
-      <ul className="pokemonIndex__list">
+      <ul className="pokemonIndex">
         {pokemonList.map(pokemon => (
           <PokemonIndexCard key={`key-${pokemon.name}`} name={pokemon.name} />
         ))}
       </ul>
-    </section>
+    </Container>
   );
 };
 

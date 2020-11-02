@@ -1,0 +1,38 @@
+.pokemonProfileLabel__single {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+
+  strong {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-weight: 450;
+    padding-left: 0.5ch;
+    font-size: 1rem;
+  }
+}
+
+.pokemonProfileLabel__list {
+  strong {
+    font-size: 1.1rem;
+  }
+
+  ul {
+    padding-top: 1rem;
+  }
+
+  li {
+    font-weight: 450;
+    font-size: 1rem;
+    padding-left: 1rem;
+    list-style: none;
+
+    &:before {
+      content: '•';
+      font-size: 1rem;
+      padding-right: 5px;
+    }
+  }
+}
