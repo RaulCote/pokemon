@@ -7,10 +7,13 @@
     "react-hooks/exhaustive-deps": "warn"
   },
   "globals": {
-    "document": "readonly",
-    "window": "readonly",
+    "afterEach": "readonly",
+    "beforeEach": "readonly"
     "describe": "readonly",
+    "document": "readonly",
+    "expect": "readonly",
     "it": "readonly",
-    "expect": "readonly"
+    "jest": "readonly",
+    "window": "readonly",
   }
 }
