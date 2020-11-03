@@ -10,7 +10,7 @@ class PokemonService {
   async get(url) {
     if (this[url]) return this[url];
 
-    const resp = await this.service(url);
+    const resp = await this.service.get(url);
 
     this.saveInCache(url, resp.data);
 
