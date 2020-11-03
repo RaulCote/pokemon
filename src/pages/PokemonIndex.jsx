@@ -7,7 +7,7 @@ import Container from '../components/Container';
 import Loading from '../components/Loading';
 import PokemonIndexSearch from '../components/PokemonIndexSearch';
 
-const PokemonsIndex = () => {
+const PokemonIndex = () => {
   const { isLoading, data } = usePokemonFetcher('/pokemon?limit=151');
   const pokemonList = data?.results ?? [];
   const { pokemonListFiltered, setSearch } = usePokemonSearch(pokemonList);
@@ -33,4 +33,4 @@ const PokemonsIndex = () => {
   );
 };
 
-export default PokemonsIndex;
+export default PokemonIndex;

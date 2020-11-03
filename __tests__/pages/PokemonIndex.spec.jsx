@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import PokemonsIndex from '../../src/pages/PokemonsIndex';
+import PokemonIndex from '../../src/pages/PokemonIndex';
 import usePokemonFetcher from '../../src/hooks/usePokemonFetcher';
 
 jest.mock('../../src/hooks/usePokemonFetcher.js');
@@ -19,11 +19,11 @@ const useHook = usePokemonFetcher.mockImplementation(() => ({
   },
 }));
 
-describe('PokemonsIndex page', () => {
+describe('PokemonIndex page', () => {
   const renderComponent = (props = {}) =>
     render(
       <MemoryRouter>
-        <PokemonsIndex {...props} />
+        <PokemonIndex {...props} />
       </MemoryRouter>
     );
 
