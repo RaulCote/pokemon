@@ -8,12 +8,12 @@
   },
   "globals": {
     "afterEach": "readonly",
-    "beforeEach": "readonly"
+    "beforeEach": "readonly",
     "describe": "readonly",
     "document": "readonly",
     "expect": "readonly",
     "it": "readonly",
     "jest": "readonly",
-    "window": "readonly",
+    "window": "readonly"
   }
 }

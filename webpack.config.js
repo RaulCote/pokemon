@@ -29,17 +29,6 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      // {
-      //   test: /\.(png|jpg|gif)$/i,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      // options: {
-      //   limit: 8192,
-      // },
-      // },
-      // ],
-      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
@@ -54,14 +43,11 @@ module.exports = {
     // allows us to do absolute imports from "src"
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.scss'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
     port: 3000,
-    hotOnly: true,
+    hot: true,
     clientLogLevel: 'silent',
     publicPath: 'http://localhost:3000/dist/',
     open: true,
