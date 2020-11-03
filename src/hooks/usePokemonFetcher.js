@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import pokemonService from '../services/pokemonService';
 
 const usePokemonFetcher = url => {
   const [data, setData] = useState();
@@ -10,6 +9,10 @@ const usePokemonFetcher = url => {
   useEffect(() => {
     const getData = async () => {
       try {
+        const { default: pokemonService } = await import(
+          '../services/pokemonService'
+        );
+
         const resp = await pokemonService.get(url);
 
         setData(resp);
