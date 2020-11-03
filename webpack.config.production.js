@@ -8,11 +8,11 @@ const WebpackBundleAnalyzer = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
 module.exports = {
-  devtool: 'source-map',
   mode: 'production',
   entry: './src/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'build/'),
+    chunkFilename: '[name].bundle.js',
     filename: 'bundle.js',
   },
   module: {

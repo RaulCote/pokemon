@@ -16,8 +16,8 @@ const PokemonProfileLabel = ({ title, properties }) => {
       <div className="pokemonProfileLabel__list">
         <strong>{title}</strong>
         <ul>
-          {properties.map(prop => (
-            <li key={`$key-pokemon-prop-${prop}`}>{prop}</li>
+          {properties.map(property => (
+            <li key={`$key-pokemon-prop-${property}`}>{property}</li>
           ))}
         </ul>
       </div>
