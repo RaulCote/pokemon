@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const CloseButton = ({ className, onClick }) => (
   <button
+    data-testid="close-button"
     type="button"
     className={`closeButton ${className}`}
     onClick={onClick}

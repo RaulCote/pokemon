@@ -22,7 +22,11 @@ const PokemonsIndex = () => {
       <PokemonIndexSearch setSearch={setSearch} />
       <ul className="pokemonIndex">
         {pokemonListFiltered.map(pokemon => (
-          <PokemonIndexCard key={`key-${pokemon.name}`} name={pokemon.name} />
+          <PokemonIndexCard
+            data-testid="pokemon-cards"
+            key={`key-${pokemon.name}`}
+            name={pokemon.name}
+          />
         ))}
       </ul>
     </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import PokemonsIndex from '../../src/pages/PokemonsIndex';
 import usePokemonFetcher from '../../src/hooks/usePokemonFetcher';
@@ -11,6 +11,9 @@ const useHook = usePokemonFetcher.mockImplementation(() => ({
     results: [
       {
         name: 'Raulator',
+      },
+      {
+        name: 'Pikachu',
       },
     ],
   },
@@ -28,7 +31,7 @@ describe('PokemonsIndex page', () => {
     jest.clearAllMocks();
   });
 
-  it('should render the Pokemon Logo and Generation 1 text', () => {
+  it('should render the Pokemon Logo and Generation 2 text', () => {
     renderComponent();
     expect(screen.getByAltText('Pokemon Logo')).toBeInTheDocument();
     expect(screen.getByText('Generation 1')).toBeInTheDocument();
@@ -38,7 +41,7 @@ describe('PokemonsIndex page', () => {
     renderComponent();
 
     expect(useHook).toHaveBeenCalledWith('/pokemon?limit=151');
-    expect(screen.getByText('1 pokemon')).toBeInTheDocument();
+    expect(screen.getByText('2 pokemon')).toBeInTheDocument();
   });
 
   it('should render an index card with the name pokemon name', () => {
@@ -49,7 +52,7 @@ describe('PokemonsIndex page', () => {
   });
 
   it('should render the loading effect if the hook return it', () => {
-    usePokemonFetcher.mockImplementation(() => ({
+    usePokemonFetcher.mockImplementationOnce(() => ({
       isLoading: true,
       data: [],
     }));
@@ -57,5 +60,26 @@ describe('PokemonsIndex page', () => {
     renderComponent();
 
     expect(screen.getByTestId('loading')).toBeInTheDocument();
+  });
+
+  it('should filter the results', () => {
+    renderComponent();
+
+    waitFor(() =>
+      expect(screen.findAllByTestId('pokemon-cards')).toHaveLength(2)
+    );
+
+    const searchInput = screen.getByPlaceholderText('Search...');
+    const event = {
+      target: {
+        value: 'RA',
+      },
+    };
+
+    fireEvent.change(searchInput, event);
+
+    waitFor(() =>
+      expect(screen.findAllByTestId('pokemon-cards')).toHaveLength(1)
+    );
   });
 });
